@@ -1,24 +1,18 @@
-# Name of workflow
-name: HELLO!
+name: make-master
 
-# Trigger the workflow on push or pull request
 on:
-  - push
-  - pull_request
-
-env:
-  CI: true
+  push:
+    branches:
+      - master
+  schedule:
+    - cron: '20 13 * * *'
 
 jobs:
   build:
-
-    # The type of machine to run the job on
     runs-on: ubuntu-latest
-
-    strategy:
-      # Node versions list
-      matrix:
-        node-version: [14.x]
-
     steps:
-      - run: make say
+      - uses: actions/checkout@master
+        with:
+          fetch-depth: 1
+      - name: Run Makefile
+        run: make all
