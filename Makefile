@@ -1,2 +1,2 @@
 say:
-	echo "Hello, $(HELLO)!"
+	echo "Hello, World!"
